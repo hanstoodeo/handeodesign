@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Mirror Patent Slide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Syne+Mono&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Syne', sans-serif;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px;
+  }
+
+  .slide {
+    width: 1200px;
+    height: 675px;
+    background: #ffffff;
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.18);
+  }
+
+  .accent-line {
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: #111;
+    z-index: 20;
+  }
+
+  /* Samsung badge */
+  .samsung-badge {
+    position: absolute;
+    top: 36px; left: 52px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    z-index: 10;
+  }
+
+  .samsung-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: #111;
+    text-transform: uppercase;
+  }
+
+  .patent-chip {
+    background: #111;
+    color: #fff;
+    font-family: 'Syne Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.12em;
+    padding: 4px 8px;
+    text-transform: uppercase;
+    border-radius: 2px;
+  }
+
+  /* Left content */
+  .left {
+    padding: 96px 48px 48px 52px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+  }
+
+  .patent-label {
+    font-family: 'Syne Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: #999;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .title {
+    font-size: 58px;
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: #111;
+    margin-bottom: 10px;
+  }
+
+  .granted-line {
+    font-family: 'Syne Mono', monospace;
+    font-size: 10px;
+    color: #888;
+    letter-spacing: 0.14em;
+    margin-bottom: 32px;
+    text-transform: uppercase;
+  }
+
+  .description {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: #444;
+    max-width: 520px;
+    margin-bottom: 22px;
+  }
+
+  .description strong {
+    font-weight: 700;
+    color: #111;
+  }
+
+  /* Feature icon row */
+  .feature-row {
+    display: flex;
+    gap: 0;
+    margin-bottom: 28px;
+    border-top: 1.5px solid #111;
+    padding-top: 16px;
+    max-width: 580px;
+  }
+
+  .feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+    padding: 0 4px;
+  }
+
+  .feature-icon {
+    font-size: 18px;
+    color: #333;
+    line-height: 1;
+  }
+
+  .feature-name {
+    font-family: 'Syne Mono', monospace;
+    font-size: 7px;
+    color: #999;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  /* Meta grid */
+  .patent-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid #e8e8e8;
+    padding-top: 16px;
+    max-width: 580px;
+  }
+
+  .meta-item {
+    padding: 8px 16px 8px 0;
+  }
+
+  .meta-label {
+    font-family: 'Syne Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.18em;
+    color: #bbb;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+
+  .meta-value {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #111;
+    letter-spacing: 0.01em;
+  }
+
+  /* Right panel */
+  .right {
+    background: #f4f3f0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    gap: 0;
+  }
+
+  /* Dot grid */
+  .right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, #ccc 1px, transparent 1px);
+    background-size: 24px 24px;
+    opacity: 0.5;
+    z-index: 0;
+  }
+
+  .views-container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 24px;
+  }
+
+  .views-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+  }
+
+  .view-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .view-label {
+    font-family: 'Syne Mono', monospace;
+    font-size: 7.5px;
+    color: #aaa;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .patent-watermark {
+    position: absolute;
+    bottom: 16px;
+    right: 0; left: 0;
+    text-align: center;
+    font-family: 'Syne Mono', monospace;
+    font-size: 8px;
+    color: #c0c0c0;
+    letter-spacing: 0.1em;
+    z-index: 3;
+  }
+
+  /* Inventor line bottom */
+  .inventor-line {
+    position: absolute;
+    bottom: 32px; left: 52px;
+    font-family: 'Syne Mono', monospace;
+    font-size: 8.5px;
+    color: #bbb;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    z-index: 10;
+  }
+  .inventor-line span { color: #777; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="accent-line"></div>
+
+  <div class="samsung-badge">
+    <div class="samsung-logo">Samsung</div>
+    <div class="patent-chip">Design Patent · USD941,042</div>
+  </div>
+
+  <!-- LEFT -->
+  <div class="left">
+    <div>
+      <div class="patent-label">"Make me up" · Smart Mirror Concept · Design Patent USD941,042</div>
+      <div class="title">Smart<br>Mirror</div>
+      <div class="granted-line">Granted 18 January 2022 · Application No. 29/733,908</div>
+
+      <div class="description">
+        AR beauty tools existed on phones — but people do their makeup in front of a <strong>mirror</strong>, 
+        not a screen. The two experiences were completely separate: try a look on your phone, 
+        then guess how it translates in real life.
+        <br><br>
+        <strong>"Make me up"</strong> closes that gap. The mirror is the display; the smartphone is 
+        the controller. Point your phone at your face to scan, then select modes — AR Makeup, 
+        Personal Colour, Golden Balance, Beauty Scan — and see the result on yourself, 
+        at full scale, in the mirror you're already standing in front of.
+      </div>
+
+      <!-- Feature icons row -->
+      <div class="feature-row">
+        <div class="feature-item">
+          <div class="feature-icon">◎</div>
+          <div class="feature-name">Mirror Mode</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">✦</div>
+          <div class="feature-name">Beauty Scan</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">◈</div>
+          <div class="feature-name">AR Makeup</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">◐</div>
+          <div class="feature-name">Personal Colour</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">⊙</div>
+          <div class="feature-name">Golden Balance</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">☀</div>
+          <div class="feature-name">Light Mode</div>
+        </div>
+      </div>
+
+      <div class="patent-meta">
+        <div class="meta-item">
+          <div class="meta-label">Patent No.</div>
+          <div class="meta-value">USD941,042</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Filed</div>
+          <div class="meta-value">07 May 2020</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Granted</div>
+          <div class="meta-value">18 Jan 2022</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Priority (KR)</div>
+          <div class="meta-value">08 Nov 2019</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Applicant</div>
+          <div class="meta-value">Samsung Electronics</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Class</div>
+          <div class="meta-value">D14</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT — Mirror patent drawings -->
+  <div class="right">
+    <div class="views-container">
+      <div class="views-row">
+
+        <!-- FIG. 1 Perspective -->
+        <div class="view-item">
+          <svg width="110" height="195" viewBox="0 0 110 210" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#d0d0d0"/>
+                <stop offset="45%" stop-color="#ececec"/>
+                <stop offset="100%" stop-color="#b8b8b8"/>
+              </linearGradient>
+            </defs>
+            <!-- Body -->
+            <rect x="14" y="0" width="84" height="172" rx="6" fill="#e2e2e2" stroke="#888" stroke-width="1.3"/>
+            <!-- Mirror face -->
+            <rect x="18" y="4" width="76" height="164" rx="4" fill="url(#g1)" stroke="#aaa" stroke-width="0.8"/>
+            <!-- Vertical seam -->
+            <rect x="52" y="8" width="4" height="152" rx="2" fill="#c0c0c0" opacity="0.9"/>
+            <!-- Reflection lines -->
+            <line x1="24" y1="10" x2="46" y2="120" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+            <line x1="30" y1="10" x2="48" y2="72" stroke="white" stroke-width="1.2" stroke-linecap="round" opacity="0.35"/>
+            <!-- Base platform -->
+            <rect x="4" y="172" width="104" height="16" rx="5" fill="#cccccc" stroke="#999" stroke-width="1"/>
+            <rect x="8" y="188" width="96" height="8" rx="4" fill="#c0c0c0" stroke="#999" stroke-width="0.8"/>
+          </svg>
+          <div class="view-label">FIG. 1<br>Perspective</div>
+        </div>
+
+        <!-- FIG. 2 Front -->
+        <div class="view-item">
+          <svg width="90" height="210" viewBox="0 0 90 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#d2d2d2"/>
+                <stop offset="50%" stop-color="#eeeeee"/>
+                <stop offset="100%" stop-color="#bababa"/>
+              </linearGradient>
+            </defs>
+            <!-- Outer -->
+            <rect x="2" y="0" width="86" height="184" rx="5" fill="#e0e0e0" stroke="#888" stroke-width="1.3"/>
+            <!-- Face -->
+            <rect x="5" y="3" width="80" height="178" rx="3.5" fill="url(#g2)" stroke="#aaa" stroke-width="0.8"/>
+            <!-- Seam -->
+            <rect x="41" y="8" width="6" height="164" rx="3" fill="#c4c4c4" opacity="0.9"/>
+            <!-- Glint -->
+            <line x1="10" y1="8" x2="34" y2="108" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.55"/>
+            <!-- Base -->
+            <rect x="8" y="184" width="72" height="14" rx="4" fill="#cccccc" stroke="#999" stroke-width="1"/>
+            <rect x="12" y="198" width="64" height="8" rx="4" fill="#c0c0c0" stroke="#999" stroke-width="0.8"/>
+          </svg>
+          <div class="view-label">FIG. 2<br>Front view</div>
+        </div>
+
+        <!-- FIG. 4 Side -->
+        <div class="view-item">
+          <svg width="36" height="210" viewBox="0 0 36 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="0" width="20" height="184" rx="4" fill="#d8d8d8" stroke="#888" stroke-width="1.3"/>
+            <rect x="11" y="3" width="14" height="178" rx="2.5" fill="#e8e8e8" stroke="#ccc" stroke-width="0.6"/>
+            <!-- Seam notches -->
+            <rect x="12" y="55" width="12" height="2.5" rx="1.2" fill="#bbb"/>
+            <rect x="12" y="105" width="12" height="2.5" rx="1.2" fill="#bbb"/>
+            <!-- Base -->
+            <rect x="0" y="184" width="36" height="12" rx="4" fill="#ccc" stroke="#999" stroke-width="1"/>
+            <rect x="2" y="196" width="32" height="8" rx="3.5" fill="#c0c0c0"/>
+          </svg>
+          <div class="view-label">FIG. 4<br>Side view</div>
+        </div>
+
+      </div>
+
+      <!-- FIG. 6 Top view -->
+      <div class="view-item" style="margin-top: 8px;">
+        <svg width="160" height="56" viewBox="0 0 160 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="8" width="156" height="38" rx="10" fill="#d8d8d8" stroke="#888" stroke-width="1.3"/>
+          <rect x="5" y="11" width="150" height="32" rx="8" fill="#e8e8e8" stroke="#ccc" stroke-width="0.7"/>
+          <!-- Seam -->
+          <rect x="74" y="14" width="6" height="26" rx="3" fill="#c4c4c4" opacity="0.9"/>
+          <!-- Camera dot -->
+          <circle cx="82" cy="27" r="3.5" fill="#c0c0c0" stroke="#aaa" stroke-width="0.8"/>
+          <circle cx="82" cy="27" r="1.4" fill="#aaa"/>
+        </svg>
+        <div class="view-label" style="margin-top: 8px;">FIG. 6 — Top view</div>
+      </div>
+
+    </div>
+
+    <div class="patent-watermark">Samsung Electronics Co., Ltd. · Suwon-si, Korea</div>
+  </div>
+
+  <!-- Inventor credit -->
+  <div class="inventor-line">
+    Named co-inventor · <span>Han-Min LEE</span> · "Make me up" Smart Mirror Concept · Samsung Electronics
+  </div>
+
+</div>
+</body>
+</html>

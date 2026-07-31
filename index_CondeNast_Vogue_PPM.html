@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Han Min Lee · Principal Program Manager</title>
+  <meta name="description" content="Han Min Lee — Senior leader with 20+ years driving large-scale transformation programs at the intersection of product strategy, technology delivery, and organisational change.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --bg:#f9f9f7; --surface:#f2f2f0; --ink:#0a0a0a; --ink-2:#3a3a3a;
+    --ink-3:#6b6b6b; --rule:#e2e2de; --nav-bg:rgba(249,249,247,0.92);
+    --serif:'Playfair Display','Times New Roman',Georgia,serif;
+    --sans:'Ubuntu',-apple-system,BlinkMacSystemFont,Helvetica,sans-serif;
+    --t-display:clamp(3.5rem,8vw,7rem); --t-title1:clamp(2rem,4vw,2.75rem);
+    --t-title2:1.375rem; --t-title3:1.25rem;
+    --t-body:1.0625rem; --t-callout:1rem; --t-subhead:0.9375rem;
+    --t-footnote:0.8125rem; --t-caption1:0.75rem; --t-caption2:0.6875rem;
+    --sp-1:0.5rem; --sp-2:1rem; --sp-3:1.5rem; --sp-4:2rem;
+    --sp-5:3rem; --sp-6:4rem; --sp-7:6rem; --sp-8:8rem;
+  }
+  html { font-size:100%; -webkit-font-smoothing:antialiased; scroll-behavior:smooth; background:var(--bg); }
+  body { background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:var(--t-body); line-height:1.5; min-height:100vh; }
+
+  .theme-toggle { display:flex; align-items:center; justify-content:center; background:none; border:none; cursor:pointer; min-width:44px; min-height:44px; padding:var(--sp-1); color:var(--ink); transition:color 0.2s; }
+  .theme-toggle:hover { color:var(--ink-2); }
+  .theme-toggle svg { width:20px; height:20px; }
+  .theme-toggle .icon-moon { display:none; }
+  .theme-toggle .icon-sun { display:block; }
+  html.dark .theme-toggle .icon-moon { display:block; }
+  html.dark .theme-toggle .icon-sun { display:none; }
+  html.dark { --bg:#000000; --surface:#1C1C1E; --ink:#FFFFFF; --ink-2:#EBEBF5; --ink-3:#A1A1A6; --rule:#38383A; --nav-bg:rgba(0,0,0,0.92); }
+  html.dark .btn-fill { background:#FFFFFF; color:#000000; }
+  html.dark .btn-fill:hover { background:#EBEBF5; }
+  html.dark .footer-cta { background:#FFFFFF; color:#000000; }
+  html.dark .footer-cta:hover { background:#EBEBF5; }
+  html.dark .skip-link { background:#FFFFFF; color:#000000; }
+  html.dark .pchip { background:var(--surface); border-color:var(--rule); color:var(--ink-2); }
+  html.dark .pchip:hover { background:var(--rule); }
+
+  .skip-link { position:absolute; top:-100%; left:var(--sp-2); background:var(--ink); color:#fff; padding:var(--sp-1) var(--sp-2); font-size:var(--t-footnote); z-index:9999; border-radius:0 0 3px 3px; text-decoration:none; }
+  .skip-link:focus { top:0; }
+  :focus-visible { outline:2px solid var(--ink); outline-offset:3px; }
+
+  nav { position:sticky; top:0; z-index:100; background:var(--nav-bg); backdrop-filter:blur(16px) saturate(1.2); -webkit-backdrop-filter:blur(16px) saturate(1.2); border-bottom:1px solid var(--rule); display:flex; align-items:center; justify-content:space-between; padding:var(--sp-2) var(--sp-3); }
+  .wordmark { font-family:'Ubuntu',sans-serif; font-size:var(--t-callout); font-weight:400; letter-spacing:0.01em; color:var(--ink); text-decoration:none; }
+  .nav-toggle { display:flex; flex-direction:column; justify-content:center; gap:5px; align-items:center; background:none; border:none; cursor:pointer; min-width:44px; min-height:44px; padding:var(--sp-1); }
+  .nav-toggle span { display:block; width:20px; height:1.5px; background:var(--ink); transition:transform 0.25s,opacity 0.25s; }
+  .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity:0; }
+  .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+  .nav-menu { display:none; position:absolute; top:100%; left:0; right:0; background:var(--nav-bg); backdrop-filter:blur(16px); border-bottom:1px solid var(--rule); list-style:none; padding:var(--sp-1) var(--sp-3) var(--sp-2); }
+  .nav-menu.open { display:block; }
+  .nav-menu a { display:flex; align-items:center; min-height:44px; padding:var(--sp-1) 0; font-size:var(--t-subhead); color:var(--ink-2); text-decoration:none; border-bottom:1px solid var(--rule); transition:color 0.2s; }
+  .nav-menu li:last-child a { border-bottom:none; }
+  .nav-menu a:hover { color:var(--ink); }
+  .nav-theme-item { border-bottom:none; display:flex; align-items:center; padding:var(--sp-1) 0; }
+
+  /* HERO */
+  .hero { padding:var(--sp-7) var(--sp-3) var(--sp-6); border-bottom:1px solid var(--rule); min-height:80vh; display:flex; flex-direction:column; justify-content:space-between; }
+  .hero-display { font-family:var(--serif); font-size:var(--t-display); font-weight:400; line-height:1.0; letter-spacing:-0.02em; color:var(--ink); margin-bottom:var(--sp-6); }
+  .hero-display em { font-style:italic; color:var(--ink-2); }
+  .hero-foot { display:flex; flex-direction:column; gap:var(--sp-4); }
+  .hero-bio { font-size:var(--t-subhead); line-height:1.65; color:var(--ink-2); max-width:56ch; }
+  .hero-bio strong { color:var(--ink); font-weight:500; }
+  .hero-meta-row { display:flex; flex-wrap:wrap; gap:var(--sp-1); }
+  .pill { display:inline-block; font-size:var(--t-caption1); letter-spacing:0.06em; color:var(--ink-3); border:1px solid var(--rule); padding:4px 10px; border-radius:100px; }
+  .hero-actions { display:flex; flex-direction:column; gap:var(--sp-2); }
+
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:var(--sp-1); min-height:48px; font-family:var(--sans); font-size:var(--t-callout); font-weight:500; letter-spacing:0.02em; text-decoration:none; transition:all 0.2s; width:100%; }
+  .btn-fill { background:var(--ink); color:#fff; padding:0 var(--sp-3); }
+  .btn-fill:hover { background:var(--ink-2); }
+  .btn-outline { border:1px solid var(--rule); color:var(--ink-2); padding:0 var(--sp-3); }
+  .btn-outline:hover { border-color:var(--ink); color:var(--ink); }
+
+  .section { padding:var(--sp-7) var(--sp-3); border-top:1px solid var(--rule); }
+  .section-eyebrow { display:block; font-size:var(--t-caption2); font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-3); margin-bottom:var(--sp-4); }
+  .section-title { font-family:var(--serif); font-size:var(--t-title1); font-weight:400; line-height:1.1; letter-spacing:-0.01em; color:var(--ink); margin-bottom:var(--sp-5); }
+  .section-title em { font-style:italic; color:var(--ink-2); }
+
+  /* PROGRAM CARDS */
+  .program-stack { display:flex; flex-direction:column; gap:1px; background:var(--rule); margin-top:var(--sp-2); }
+  .program-card { background:var(--bg); padding:var(--sp-4) var(--sp-3); display:flex; flex-direction:column; gap:var(--sp-2); }
+  .program-eyebrow { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:var(--sp-1); }
+  .program-org { font-size:var(--t-caption2); letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-3); font-weight:500; }
+  .program-period { font-family:var(--serif); font-size:var(--t-caption1); font-style:italic; color:var(--ink-3); }
+  .program-title { font-family:var(--serif); font-size:var(--t-title2); font-weight:400; line-height:1.2; color:var(--ink); }
+  .program-body { font-size:var(--t-subhead); line-height:1.65; color:var(--ink-2); }
+  .program-tags { display:flex; flex-wrap:wrap; gap:6px; }
+  .tag { font-size:var(--t-caption2); letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-3); border:1px solid var(--rule); padding:3px 9px; border-radius:2px; }
+  .program-stats { display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-4); padding-top:var(--sp-3); border-top:1px solid var(--rule); }
+  .stat-n { font-family:var(--serif); font-size:clamp(2rem,5vw,3rem); font-weight:400; line-height:1; color:var(--ink); }
+  .stat-l { font-size:var(--t-caption2); letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-3); margin-top:3px; font-weight:500; }
+
+  /* CV */
+  .cv-intro { font-size:var(--t-subhead); line-height:1.75; color:var(--ink-2); max-width:60ch; margin-bottom:var(--sp-5); padding-bottom:var(--sp-5); border-bottom:1px solid var(--rule); }
+  .cv-intro strong { color:var(--ink); font-weight:500; }
+  .skills-grid { display:flex; flex-direction:column; margin-bottom:var(--sp-3); }
+  .skill-row { display:grid; grid-template-columns:7rem 1fr; gap:var(--sp-2); align-items:start; padding:var(--sp-2) 0; border-bottom:1px solid var(--rule); }
+  .skill-name { font-size:var(--t-caption2); font-weight:500; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink); padding-top:3px; }
+  .skill-desc { font-size:var(--t-footnote); color:var(--ink-2); line-height:1.55; }
+  .exp-item { padding:var(--sp-4) 0; border-bottom:1px solid var(--rule); }
+  .exp-item:last-child { border-bottom:none; padding-bottom:0; }
+  .exp-header { margin-bottom:var(--sp-2); }
+  .exp-co { font-size:var(--t-caption2); font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-3); margin-bottom:4px; }
+  .exp-role { font-family:var(--serif); font-size:var(--t-title3); font-weight:400; line-height:1.2; color:var(--ink); margin-bottom:4px; }
+  .exp-meta { font-size:var(--t-footnote); color:var(--ink-3); }
+  .exp-bullets { list-style:none; display:flex; flex-direction:column; gap:10px; margin-top:var(--sp-2); }
+  .exp-bullets li { font-size:var(--t-subhead); line-height:1.65; color:var(--ink-2); padding-left:1rem; position:relative; }
+  .exp-bullets li::before { content:'·'; color:var(--ink-3); font-size:1.2rem; line-height:1.5; position:absolute; left:0; top:0; }
+  .exp-bullets li strong { color:var(--ink); font-weight:500; }
+  .cv-layout { display:flex; flex-direction:column; gap:var(--sp-5); }
+  .cv-sidebar { order:2; padding-bottom:var(--sp-5); border-bottom:1px solid var(--rule); }
+  .info-grid { display:flex; flex-direction:column; gap:var(--sp-4); }
+  .info-block-label { display:block; font-size:var(--t-caption2); font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-3); margin-bottom:var(--sp-2); padding-bottom:var(--sp-1); border-bottom:1px solid var(--rule); }
+  .info-row { font-size:var(--t-subhead); color:var(--ink-2); line-height:1.6; margin-bottom:6px; }
+  .info-lbl { font-size:var(--t-caption2); font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:2px; }
+  .info-row a { color:var(--ink-2); text-decoration:none; border-bottom:1px solid var(--rule); transition:border-color 0.2s,color 0.2s; }
+  .info-row a:hover { color:var(--ink); border-color:var(--ink); }
+
+  /* AWARDS */
+  .award-list { display:flex; flex-direction:column; }
+  .award-row { display:grid; grid-template-columns:4.5rem 1fr; gap:var(--sp-2); padding:var(--sp-2) 0; border-bottom:1px solid var(--rule); align-items:start; }
+  .award-yr { font-family:var(--serif); font-size:var(--t-subhead); font-style:italic; color:var(--ink-3); }
+  .award-nm { font-size:var(--t-subhead); color:var(--ink); line-height:1.45; }
+  .award-nm a { color:var(--ink); text-decoration:underline; text-underline-offset:3px; text-decoration-color:var(--ink-3); transition:text-decoration-color 0.2s; }
+  .award-nm a:hover { text-decoration-color:var(--ink); }
+  .pchip { display:inline-flex; align-items:center; font-size:0.6875rem; font-weight:500; letter-spacing:0.04em; color:var(--ink-2); background:var(--surface); border:1px solid var(--rule); padding:2px 7px; border-radius:3px; text-decoration:none; transition:background 0.15s; white-space:nowrap; vertical-align:middle; margin:2px 1px; }
+  .pchip:hover { background:var(--rule); }
+
+  /* FOOTER */
+  footer { border-top:1px solid var(--rule); padding:var(--sp-7) var(--sp-3) var(--sp-5); }
+  .footer-display { font-family:var(--serif); font-size:clamp(2.5rem,7vw,5rem); font-weight:400; line-height:1.05; letter-spacing:-0.02em; color:var(--ink); margin-bottom:var(--sp-5); }
+  .footer-display em { font-style:italic; color:var(--ink-2); }
+  .contact-list { display:flex; flex-direction:column; gap:var(--sp-2); margin-bottom:var(--sp-5); }
+  .contact-row { display:flex; gap:var(--sp-3); align-items:baseline; }
+  .c-lbl { font-size:var(--t-caption2); font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-3); width:5.5rem; flex-shrink:0; }
+  .c-val { font-size:var(--t-subhead); color:var(--ink-2); text-decoration:none; transition:color 0.2s; }
+  .c-val:hover { color:var(--ink); }
+  .footer-cta { display:inline-flex; align-items:center; gap:var(--sp-1); background:var(--ink); color:#fff; font-size:var(--t-callout); font-weight:500; padding:0 var(--sp-4); min-height:52px; text-decoration:none; transition:background 0.2s; width:100%; justify-content:center; margin-bottom:var(--sp-5); }
+  .footer-cta:hover { background:var(--ink-2); }
+  .footer-base { display:flex; flex-direction:column; gap:4px; padding-top:var(--sp-3); border-top:1px solid var(--rule); }
+  .footer-wm { font-family:'Ubuntu',sans-serif; font-size:var(--t-subhead); color:var(--ink-3); text-decoration:none; }
+  .footer-wm:hover { color:var(--ink); }
+  .footer-note { font-size:var(--t-footnote); color:var(--ink-3); }
+
+  @media (prefers-color-scheme:dark) {
+    :root { --bg:#000000; --surface:#1C1C1E; --ink:#FFFFFF; --ink-2:#EBEBF5; --ink-3:#A1A1A6; --rule:#38383A; --nav-bg:rgba(0,0,0,0.92); }
+    .btn-fill { background:#FFFFFF; color:#000000; }
+    .btn-fill:hover { background:#EBEBF5; }
+    .footer-cta { background:#FFFFFF; color:#000000; }
+    .footer-cta:hover { background:#EBEBF5; }
+    .skip-link { background:#FFFFFF; color:#000000; }
+    .pchip { background:var(--surface); border-color:var(--rule); color:var(--ink-2); }
+    .pchip:hover { background:var(--rule); }
+  }
+
+  @keyframes rise { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+  .rise { opacity:0; animation:rise 0.8s cubic-bezier(0.22,1,0.36,1) forwards; }
+  .r1{animation-delay:0.05s} .r2{animation-delay:0.18s} .r3{animation-delay:0.30s} .r4{animation-delay:0.42s}
+
+  @media (min-width:640px) {
+    nav{padding:var(--sp-2) var(--sp-5)} .hero{padding:var(--sp-7) var(--sp-5) var(--sp-6)}
+    .section{padding:var(--sp-7) var(--sp-5)} footer{padding:var(--sp-7) var(--sp-5) var(--sp-5)}
+    .hero-actions{flex-direction:row} .btn{width:auto} .footer-cta{width:auto}
+    .footer-base{flex-direction:row;justify-content:space-between;align-items:baseline}
+  }
+
+  @media (min-width:960px) {
+    nav{padding:var(--sp-2) var(--sp-6)}
+    .nav-toggle{display:none}
+    .nav-menu{display:flex !important;position:static;background:transparent;border:none;padding:0;flex-direction:row;gap:var(--sp-4);align-items:center}
+    .nav-menu a{font-size:var(--t-caption1);min-height:auto;padding:0;border:none;color:var(--ink-3);letter-spacing:0.06em}
+    .nav-menu li{display:flex;align-items:center}
+    .nav-menu li:nth-last-child(2) a{color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:1px}
+    .nav-menu li:last-child a{color:var(--ink);border-bottom:none}
+    .nav-menu a:hover{color:var(--ink)}
+    .nav-theme-item{padding:0}
+    .hero{padding:var(--sp-8) var(--sp-6) var(--sp-7);display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-7);min-height:90vh;align-items:end}
+    .hero-display{margin-bottom:0;grid-column:1/-1}
+    .hero-foot{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-6);align-items:end}
+    .section{padding:var(--sp-8) var(--sp-6)} footer{padding:var(--sp-8) var(--sp-6) var(--sp-6)}
+    .program-stack{display:grid;grid-template-columns:1fr 1fr}
+    .program-card{padding:var(--sp-5)}
+    .program-stats{grid-template-columns:repeat(3,1fr)}
+    .program-card.span2{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-6)}
+    .program-card.span2 .program-stats{border-top:none;padding-top:0;grid-template-columns:repeat(3,1fr);gap:var(--sp-4)}
+    .cv-layout{display:grid;grid-template-columns:1fr 375px;gap:var(--sp-6)}
+    .cv-sidebar{position:sticky;top:76px;align-self:start;border-bottom:none;padding-bottom:0;order:2}
+    .footer-inner{display:grid;grid-template-columns:1fr auto;gap:var(--sp-7);align-items:start}
+    .footer-cta{width:auto}
+    .award-row{grid-template-columns:5.5rem 1fr}
+  }
+
+  @media (min-width:1280px) {
+    nav{padding:var(--sp-2) var(--sp-8)} .hero{padding:var(--sp-8) var(--sp-8) var(--sp-7)}
+    .section{padding:var(--sp-8) var(--sp-8)} footer{padding:var(--sp-8) var(--sp-8) var(--sp-6)}
+  }
+
+  @media (prefers-reduced-motion:reduce) {
+    .rise{animation:none;opacity:1} *{transition-duration:0.01ms !important;scroll-behavior:auto !important}
+  }
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Main navigation">
+  <a href="https://www.handeodesign.co.uk" target="_blank" rel="noopener" class="wordmark">handeodesign</a>
+  <div style="display:flex;align-items:center;gap:var(--sp-1)">
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <ul class="nav-menu" id="nav-menu" role="list">
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#cv">CV</a></li>
+    <li><a href="https://www.figma.com/deck/8Gs4aARpmqxXbSyzUj1FfK" target="_blank" rel="noopener">Portfolio</a></li>
+    <li><a href="#contact">Get in touch</a></li>
+    <li class="nav-theme-item">
+      <a href="https://linkedin.com/in/hanminlee" target="_blank" rel="noopener" aria-label="LinkedIn" class="theme-toggle" style="min-width:auto">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:16px;height:16px"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+    </li>
+    <li class="nav-theme-item">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </li>
+  </ul>
+</nav>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero" aria-labelledby="hero-h">
+  <h1 id="hero-h" class="hero-display rise r1">
+    Structuring<br><em>complexity.</em><br>Delivering change.
+  </h1>
+  <div class="hero-foot">
+    <div>
+      <p class="hero-bio rise r2">
+        Senior leader with 20+ years driving <strong>large-scale transformation programs</strong> at the intersection of product strategy, technology delivery, and organisational change. I structure ambiguous programs, align teams across domains, and ensure that ambitious initiatives are not just delivered but <strong>adopted and embedded</strong>.
+      </p>
+    </div>
+    <div>
+      <div class="hero-meta-row rise r3" style="margin-bottom:1rem">
+        <span class="pill">Han Min Lee</span>
+        <span class="pill">Principal Program Manager</span>
+        <span class="pill">London, UK</span>
+        <span class="pill">Global Talent Visa</span>
+      </div>
+      <div class="hero-meta-row rise r3" style="margin-bottom:1.5rem">
+        <span class="pill">Currently at Entain</span>
+        <span class="pill">Previously Dyson · Samsung · Midea</span>
+        <span class="pill">20+ years</span>
+      </div>
+      <div class="hero-actions rise r4">
+        <a href="https://www.figma.com/deck/8Gs4aARpmqxXbSyzUj1FfK" target="_blank" rel="noopener" class="btn btn-fill">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          View Portfolio
+        </a>
+        <a href="#cv" class="btn btn-outline">Full CV</a>
+        <a href="mailto:acupunch@gmail.com" class="btn btn-outline">Get in touch</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section class="section" id="programs" aria-labelledby="programs-h">
+  <span class="section-eyebrow">Selected Programs</span>
+  <h2 id="programs-h" class="section-title">Transformation at <em>scale.</em></h2>
+
+  <div class="program-stack" role="list">
+
+    <article class="program-card span2" role="listitem">
+      <div>
+        <div class="program-eyebrow"><span class="program-org">Entain Group</span><span class="program-period">2026 – Present</span></div>
+        <h3 class="program-title">DICE: Cross-brand Design Infrastructure Transformation</h3>
+        <p class="program-body">Led the consolidation of design infrastructure across 30+ brands — aligning product teams, engineering, and brand stakeholders on a shared operating model. Structured complex cross-functional dependencies, defined federated governance, and drove adoption across autonomous product teams with no direct authority.</p>
+        <div class="program-tags"><span class="tag">Cross-domain Transformation</span><span class="tag">Federated Governance</span><span class="tag">Platform Modernisation</span><span class="tag">AI Integration</span></div>
+      </div>
+      <div class="program-stats">
+        <div><div class="stat-n">30+</div><div class="stat-l">Brands aligned</div></div>
+        <div><div class="stat-n">883</div><div class="stat-l">Shared tokens, zero forks</div></div>
+      </div>
+    </article>
+
+    <article class="program-card span2" role="listitem">
+      <div>
+        <div class="program-eyebrow"><span class="program-org">Entain Group</span><span class="program-period">2026 – Present</span></div>
+        <h3 class="program-title">AI Transformation: Embedding AI-enabled Ways of Working</h3>
+        <p class="program-body">Owned AI transformation strategy for the design org — defining operating models, embedding AI-assisted workflows, and shifting team capability from ad hoc experimentation to embedded practice. Structured governance where standard team-level processes were insufficient for cross-domain coordination.</p>
+        <div class="program-tags"><span class="tag">AI Adoption</span><span class="tag">Operating Model Design</span><span class="tag">Workflow Transformation</span><span class="tag">Change Management</span></div>
+      </div>
+      <div class="program-stats">
+        <div><div class="stat-n">−30%</div><div class="stat-l">Iteration cycles</div></div>
+        <div><div class="stat-n">Org-wide</div><div class="stat-l">AI adoption embedded</div></div>
+      </div>
+    </article>
+
+    <article class="program-card span2" role="listitem">
+      <div>
+        <div class="program-eyebrow"><span class="program-org">Dyson</span><span class="program-period">2023 – 2024</span></div>
+        <h3 class="program-title">E-Commerce Platform Modernisation</h3>
+        <p class="program-body">Led cross-market platform rebuild — rebuilding the design system foundation and standardising delivery across web and app globally. Managed cross-functional dependencies across Product, Engineering, and Commercial.</p>
+        <div class="program-tags"><span class="tag">Platform Modernisation</span><span class="tag">Cross-market Delivery</span><span class="tag">Stakeholder Alignment</span></div>
+      </div>
+      <div class="program-stats" style="border-top:none;padding-top:0;align-self:start">
+        <div><div class="stat-n">+2.7%</div><div class="stat-l">Order conversion</div></div>
+        <div><div class="stat-n">~£11M</div><div class="stat-l">Revenue impact</div></div>
+        <div><div class="stat-n">−30%</div><div class="stat-l">Iteration cycles</div></div>
+      </div>
+    </article>
+
+    <article class="program-card span2" role="listitem">
+      <div>
+        <div class="program-eyebrow"><span class="program-org">Samsung Electronics</span><span class="program-period">2015 – 2020</span></div>
+        <h3 class="program-title">Family Hub™: Four-generation IoT Platform Program</h3>
+        <p class="program-body">Directed a 25-person cross-functional program across four product generations — managing third-party service integrations (Bixby AI, Spotify, Amazon Dash, Whisk), aligning Product, Engineering, and Business leadership, and scaling delivery across global markets. Secured 6 international patents.</p>
+        <div class="program-tags"><span class="tag">Multi-year Program</span><span class="tag">Cross-functional Leadership</span><span class="tag">Third-party Integration</span><span class="tag">Global Delivery</span></div>
+      </div>
+      <div class="program-stats">
+        <div><div class="stat-n">6×</div><div class="stat-l">Revenue growth · $63M→$376M</div></div>
+        <div><div class="stat-n">6</div><div class="stat-l">Patents held</div></div>
+        <div><div class="stat-n">Gold</div><div class="stat-l">IDEA Award 2020</div></div>
+        <div><div class="stat-n">5×</div><div class="stat-l">iF Design Award</div></div>
+        <div><div class="stat-n">4</div><div class="stat-l">Generations shipped</div></div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- CV -->
+<section class="section" id="cv" aria-labelledby="cv-h">
+  <span class="section-eyebrow">Curriculum Vitae</span>
+  <h2 id="cv-h" class="section-title">Full <em>experience.</em></h2>
+
+  <div class="cv-layout">
+
+    <aside class="cv-sidebar" aria-label="Skills and profile">
+      <div class="info-grid">
+
+        <div class="info-block">
+          <span class="info-block-label">Core Skills</span>
+          <div class="skills-grid">
+            <div class="skill-row"><span class="skill-name">Program Leadership</span><span class="skill-desc">Cross-domain transformation, strategic governance, outcome-oriented delivery</span></div>
+            <div class="skill-row"><span class="skill-name">AI Integration</span><span class="skill-desc">AI-enabled ways of working, workflow transformation, generative tooling embedded in practice</span></div>
+            <div class="skill-row"><span class="skill-name">Stakeholder Partnership</span><span class="skill-desc">Influencing without authority, executive-level alignment, cross-functional dependency management</span></div>
+            <div class="skill-row"><span class="skill-name">Systems Thinking</span><span class="skill-desc">Platform modernisation, design systems, operating model design, scalable frameworks</span></div>
+            <div class="skill-row"><span class="skill-name">Change Management</span><span class="skill-desc">Adoption planning, federated governance, team capability development</span></div>
+            <div class="skill-row"><span class="skill-name">Delivery Tools</span><span class="skill-desc">Figma, GitHub, Cursor, Claude, agile frameworks, implementation QA</span></div>
+          </div>
+        </div>
+
+        <div class="info-block">
+          <span class="info-block-label">Education</span>
+          <div class="info-row"><span class="info-lbl">Degree</span>BA (Hons) Visual Communication, First Class</div>
+          <div class="info-row"><span class="info-lbl">University</span>Birmingham City University, UK</div>
+          <div class="info-row"><span class="info-lbl">Major</span>Time-Based Media · Interaction Design</div>
+          <div class="info-row"><span class="info-lbl">Thesis</span>'Interactive as the Communication Bridge'</div>
+        </div>
+
+        <div class="info-block">
+          <span class="info-block-label">Languages</span>
+          <div class="info-row">English (professional)</div>
+          <div class="info-row">Chinese Mandarin (professional)</div>
+          <div class="info-row">Bahasa Malay (professional)</div>
+        </div>
+
+        <div class="info-block">
+          <span class="info-block-label">Additional</span>
+          <div class="info-row"><span class="info-lbl">Jury</span><a href="https://iaaawards.world/judge/profile/han_min_lee" target="_blank" rel="noopener">London Design Awards</a></div>
+          <div class="info-row"><span class="info-lbl">Mentoring</span><a href="https://adplist.org/mentors/han-min-lee" target="_blank" rel="noopener">ADPList</a></div>
+          <div class="info-row"><span class="info-lbl">Studio</span><a href="https://www.handeodesign.co.uk" target="_blank" rel="noopener">handeodesign.co.uk</a></div>
+          <div class="info-row"><span class="info-lbl">Visa</span>Global Talent Visa · no sponsorship required</div>
+        </div>
+
+        <div class="info-block">
+          <span class="info-block-label">Contact</span>
+          <div class="info-row"><span class="info-lbl">Phone</span><a href="tel:+447917996657">07917 996 657</a></div>
+          <div class="info-row"><span class="info-lbl">Email</span><a href="mailto:acupunch@gmail.com">acupunch@gmail.com</a></div>
+          <div class="info-row"><span class="info-lbl">LinkedIn</span><a href="https://linkedin.com/in/hanminlee" target="_blank" rel="noopener">hanminlee</a></div>
+        </div>
+
+      </div>
+    </aside>
+
+    <div>
+      <p class="cv-intro">Senior leader with 20+ years driving <strong>large-scale transformation programs</strong> at the intersection of product strategy, technology delivery, and organisational change. Track record of leading complex, cross-domain initiatives — from platform modernisation and AI integration to design system transformation across global organisations. Comfortable influencing without authority, challenging direction when assumptions are not viable, and using AI as a core tool for improving clarity and execution pace.</p>
+
+      <div class="exp-list">
+
+        <article class="exp-item">
+          <div class="exp-header">
+            <div class="exp-co">Entain Group / Experience Design Group · London, UK</div>
+            <div class="exp-role">Lead Product Designer / Program Lead</div>
+            <div class="exp-meta">Mar 2026 – Present</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Lead the architecture and governance of <strong>DICE</strong>, a cross-brand transformation program consolidating design infrastructure across 30+ brands — aligning product teams, engineering, and brand stakeholders on a shared operating model.</li>
+            <li>Act as strategic partner to design and engineering leadership, structuring complex cross-functional dependencies and driving federated adoption across autonomous product teams.</li>
+            <li>Own <strong>AI transformation strategy</strong> for the design org — defining operating models, embedding AI-assisted workflows, and shifting team capability from ad hoc experimentation to embedded practice.</li>
+            <li>Establish governance frameworks, documentation, and ways of working where standard team-level processes are insufficient for cross-domain coordination.</li>
+          </ul>
+        </article>
+
+        <article class="exp-item">
+          <div class="exp-header">
+            <div class="exp-co"><a href="https://www.handeodesign.co.uk" target="_blank" rel="noopener" style="color:var(--ink-3);text-decoration:none;border-bottom:1px solid var(--rule)">Handeodesign</a> · England, UK</div>
+            <div class="exp-role">Founder / Design Mentor</div>
+            <div class="exp-meta">Aug 2024 – Present</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Independent design practice focused on concept-to-production digital experiences, design strategy advisory, and mentoring the next generation of product designers.</li>
+          </ul>
+        </article>
+
+        <article class="exp-item">
+          <div class="exp-header">
+            <div class="exp-co">Dyson / Global Commercial Group · Malmesbury, UK</div>
+            <div class="exp-role">Experience Design Lead, Senior Manager</div>
+            <div class="exp-meta">Sep 2023 – Oct 2024</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Led a six-person team scaling Dyson's global e-commerce platform, responsible for design quality, system consistency, and cross-market coherence across web and app.</li>
+            <li>Applied behavioural data and analytics to redesign key purchase journeys, contributing to a <strong>+2.7% uplift in order conversion (~£11M incremental revenue)</strong>.</li>
+            <li>Introduced AI-assisted methods to accelerate prototyping and exploration, reducing iteration cycles and improving decision velocity by 30%.</li>
+            <li>Worked closely with engineering to establish token-based workflows and implementation review processes.</li>
+          </ul>
+        </article>
+
+        <article class="exp-item">
+          <div class="exp-header">
+            <div class="exp-co">Midea Group / Small Domestic Appliance · Foshan, China</div>
+            <div class="exp-role">Head of UX Design &amp; Innovation</div>
+            <div class="exp-meta">Dec 2021 – Apr 2023</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Directed a cross-functional team of 10 across UX, research, and visual design, elevating experience quality across multiple product lines and global markets.</li>
+            <li>Standardised UED processes and design systems across brand portfolio, improving production efficiency by 25% and reducing development cycles by 50%.</li>
+            <li>Led UX strategy for international market expansion, shaping product experiences to resonate with diverse audiences.</li>
+          </ul>
+        </article>
+
+        <article class="exp-item">
+          <div class="exp-header">
+            <div class="exp-co">Samsung Electronics / Home Appliance · Seoul, South Korea</div>
+            <div class="exp-role">Director of UX Innovation</div>
+            <div class="exp-meta">Nov 2015 – Mar 2020</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Led a 25-person cross-functional program across four generations of the <strong>Family Hub™ IoT experience</strong>, used by millions of households worldwide. Secured international patents <a href="https://patents.google.com/patent/US11016634B2" target="_blank" rel="noopener" class="pchip">US11016634B2</a> <a href="https://patents.google.com/patent/EP3504613B1" target="_blank" rel="noopener" class="pchip">EP3504613B1</a> <a href="https://patents.google.com/patent/KR102346635B1" target="_blank" rel="noopener" class="pchip">KR102346635B1</a> <a href="https://patents.google.com/patent/WO2018044091A1" target="_blank" rel="noopener" class="pchip">WO2018044091A1</a> and Smart Mirror designs <a href="https://www.lens.org/lens/patent/023-928-264-825-341/frontpage" target="_blank" rel="noopener" class="pchip">USD941,042 S</a> <a href="https://www.lens.org/lens/patent/099-384-371-805-383/frontpage" target="_blank" rel="noopener" class="pchip">USD941,040 S</a>.</li>
+            <li>Managed third-party service integrations (Bixby AI, Spotify, Amazon Dash, Whisk) — aligning Product, Engineering, and Business stakeholders across global markets.</li>
+            <li>Contributed to a design language that defined Samsung's smart home category leadership and drove 6× revenue growth ($63M to $376M).</li>
+            <li>Built and scaled a delivery culture with rigorous review practices and a consistent bar for craft.</li>
+          </ul>
+        </article>
+
+        <article class="exp-item">
+          <div class="exp-header">
+            <div class="exp-co">Philips Design · Autodesk · HP · Creative Technology</div>
+            <div class="exp-role">Senior UX Designer / Consultant</div>
+            <div class="exp-meta">1999 – 2015 · Singapore · Hong Kong · Global</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>20+ years of progressive experience across Singapore, Hong Kong, and global roles — covering interaction design, information architecture, and brand-led digital product delivery.</li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECOGNITION -->
+<section class="section" id="recognition" aria-labelledby="rec-h">
+  <span class="section-eyebrow">Recognition</span>
+  <h2 id="rec-h" class="section-title">Awards &amp; <em>Patents.</em></h2>
+  <div class="award-list" role="list">
+    <div class="award-row" role="listitem">
+      <span class="award-yr">Patent</span>
+      <span class="award-nm">Refrigerator Storage System Having a Display &amp; Food Storage Apparatus And Control Method Thereof<br>
+        <a href="https://patents.google.com/patent/US11016634B2" target="_blank" rel="noopener" class="pchip">US11016634B2</a>
+        <a href="https://patents.google.com/patent/EP3504613B1" target="_blank" rel="noopener" class="pchip">EP3504613B1</a>
+        <a href="https://patents.google.com/patent/KR102346635B1" target="_blank" rel="noopener" class="pchip">KR102346635B1</a>
+        <a href="https://patents.google.com/patent/WO2018044091A1" target="_blank" rel="noopener" class="pchip">WO2018044091A1</a>
+        <span style="font-size:var(--t-footnote);color:var(--ink-3);margin-left:4px">· Filed 31/08/2017</span>
+      </span>
+    </div>
+    <div class="award-row" role="listitem">
+      <span class="award-yr">Patent</span>
+      <span class="award-nm">Smart Mirror Ornamental Design<br>
+        <a href="https://www.lens.org/lens/patent/023-928-264-825-341/frontpage" target="_blank" rel="noopener" class="pchip">USD941,042 S</a>
+        <a href="https://www.lens.org/lens/patent/099-384-371-805-383/frontpage" target="_blank" rel="noopener" class="pchip">USD941,040 S</a>
+      </span>
+    </div>
+    <div class="award-row" role="listitem"><span class="award-yr">2024</span><span class="award-nm">iF Design Award: <a href="https://ifdesign.com//winner-ranking/project/dual-zone-air-fryer/620955" target="_blank" rel="noopener">Dual Zone Air Fryer</a> &amp; <a href="https://ifdesign.com//winner-ranking/project/toshiba-eaves-vacuum-pressure-rice-cooker/620630" target="_blank" rel="noopener">TOSHIBA Eaves Vacuum Pressure Rice Cooker</a></span></div>
+    <div class="award-row" role="listitem"><span class="award-yr">2023</span><span class="award-nm">iF Design Award: <a href="https://ifdesign.com//winner-ranking/project/food-icon-design/563412" target="_blank" rel="noopener">Food Icon Design</a> &amp; <a href="https://ifdesign.com//winner-ranking/project/full-surface-induction-cooktop-ux/563410" target="_blank" rel="noopener">Full Surface Induction Cooktop UX</a></span></div>
+    <div class="award-row" role="listitem"><span class="award-yr">2020</span><span class="award-nm">IDEA Gold Award: <a href="https://www.idsa.org/awards-recognition/idea/idea-gallery/bespoke-family-hub-ux/" target="_blank" rel="noopener">BESPOKE Family Hub UX</a></span></div>
+    <div class="award-row" role="listitem"><span class="award-yr">2020</span><span class="award-nm">iF Design Award: <a href="https://ifdesign.com//winner-ranking/project/bespoke-family-hub/282934" target="_blank" rel="noopener">BESPOKE Family Hub</a> &amp; <a href="https://ifdesign.com/en/winner-ranking/project/bixby-ambient/281989" target="_blank" rel="noopener">Bixby Ambient: Artificial Intelligence</a></span></div>
+    <div class="award-row" role="listitem"><span class="award-yr">2019</span><span class="award-nm">iF Design Award: Family Hub 4.0 Family Board</span></div>
+    <div class="award-row" role="listitem"><span class="award-yr">2019</span><span class="award-nm">CES Innovation Award Honouree: Family Hub 4.0</span></div>
+    <div class="award-row" role="listitem"><span class="award-yr">2018</span><span class="award-nm">iF Design Award: <a href="https://ifdesign.com//winner-ranking/project/family-hub-30-ux/234181" target="_blank" rel="noopener">Family Hub 3.0 UX</a></span></div>
+    <div class="award-row" role="listitem"><span class="award-yr">2018</span><span class="award-nm">CES Best of Innovations: Family Hub 3.0</span></div>
+  </div>
+</section>
+
+</main>
+
+<footer id="contact">
+  <div class="footer-inner">
+    <div>
+      <h2 class="footer-display">Let's work<br><em>together.</em></h2>
+      <address class="contact-list" style="font-style:normal">
+        <div class="contact-row"><span class="c-lbl">Email</span><a href="mailto:acupunch@gmail.com" class="c-val">acupunch@gmail.com</a></div>
+        <div class="contact-row"><span class="c-lbl">Phone</span><a href="tel:+447917996657" class="c-val">07917 996 657</a></div>
+        <div class="contact-row"><span class="c-lbl">LinkedIn</span><a href="https://linkedin.com/in/hanminlee" target="_blank" rel="noopener" class="c-val">linkedin.com/in/hanminlee</a></div>
+        <div class="contact-row"><span class="c-lbl">Studio</span><a href="https://www.handeodesign.co.uk" target="_blank" rel="noopener" class="c-val">handeodesign.co.uk</a></div>
+        <div class="contact-row"><span class="c-lbl">Mentoring</span><a href="https://adplist.org/mentors/han-min-lee" target="_blank" rel="noopener" class="c-val">ADPList</a></div>
+      </address>
+    </div>
+    <div>
+      <a href="https://www.figma.com/deck/8Gs4aARpmqxXbSyzUj1FfK" target="_blank" rel="noopener" class="footer-cta">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        View Full Portfolio
+      </a>
+    </div>
+  </div>
+  <div class="footer-base">
+    <a href="https://www.handeodesign.co.uk" target="_blank" rel="noopener" class="footer-wm">handeodesign</a>
+    <span class="footer-note">Han Min Lee · Principal Program Manager · London · Global Talent Visa</span>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.querySelector('.nav-toggle');
+  const menu = document.querySelector('.nav-menu');
+  toggle.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    menu.classList.toggle('open', !open);
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    toggle.setAttribute('aria-expanded', 'false');
+    menu.classList.remove('open');
+  }));
+  (function() {
+    const themeBtn = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    let manualOverride = false;
+    function getSystemTheme() { return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    function applyTheme(t) { t === 'dark' ? html.classList.add('dark') : html.classList.remove('dark'); }
+    applyTheme(getSystemTheme());
+    themeBtn.addEventListener('click', () => { manualOverride = true; applyTheme(html.classList.contains('dark') ? 'light' : 'dark'); });
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => { if (!manualOverride) applyTheme(e.matches ? 'dark' : 'light'); });
+  })();
+</script>
+
+</body>
+</html>
